@@ -15,7 +15,6 @@ const Transactions = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-    console.log("Oliver")
       addTransaction({fee: gaussianRandom()});
     }, 2000);
 

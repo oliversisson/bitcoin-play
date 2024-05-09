@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
 import './App.css';
-import Transaction from './Transaction.js';
+import { ThemeProvider } from './MyContext';
+import NewBlock from './NewBlock.js';
+import Transactions from './Transactions.js';
 
 function gaussianRandom(mean=6, stdev=1) {
     const u = 1 - Math.random(); // Converting [0,1) to (0,1]
@@ -10,43 +11,24 @@ function gaussianRandom(mean=6, stdev=1) {
     return z * stdev + mean;
 }
 
-function App() {
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTransactions((prevTs) => {
-        const newTs = [...prevTs];
-        newTs.push({key: newTs.length, fee: gaussianRandom()});
-        return newTs;
-      });
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
+const setTransactions = (fn) => {return 0;};
+const App = () => {
+  const sharedValue = {
+      transactions: []
+    };
 
   return (
-    <div className="App">
-      <div className="header">
-        <h2>
-          Bitcoin Play!
-        </h2>
+    <ThemeProvider>
+      <div className="App">
+        <div className="header">
+          <h2>
+            Bitcoin Play!
+          </h2>
+        </div>
+        <Transactions />
+        <NewBlock />
       </div>
-      <div className="transactions">
-        <p>Available uncommitted transactions:</p>
-        {transactions.map(t => (
-          <Transaction t={t} key={t.key} />
-        ))}
-      </div>
-      <div className="newblock">
-        <p>Your proposed new block</p>
-        {transactions.filter(t => (!!t.selected && true)).map(t => (
-          <Transaction t={t} key={t.key} />
-        ))}
-        <p> Nonce: <input type="number" /> </p>
-        <button type="button">Calculate SHA256</button>
-      </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

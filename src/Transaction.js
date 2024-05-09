@@ -9,13 +9,15 @@ class Transaction extends React.Component {
       selected: !!t.selected,
     }
   }
+
   onClick = () => {
     const {t} = this.props;
     t.selected = !t.selected;
     this.setState({selected: t.selected});
   }
+
   render() {
-  const {t} = this.props;
+    const {t} = this.props;
     const style = t.selected ? {color: 'red', fontWeight: 'bold'} : {};
     return (
 //    <React.Fragment>

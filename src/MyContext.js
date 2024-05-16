@@ -4,11 +4,16 @@ const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const [balance, setBalance] = useState(0);
+  const hackBlocks = [
+    {hash: "77f3", noTransactions: 3, profit: 6},
+    {hash: "72f3", noTransactions: 2, profit: 7},
+    {hash: "79e3", noTransactions: 3, profit: 8},
+  ];
   const [blocks, setBlocks] = useState([]);
   const [key, setKey] = useState(1);
   const [transactions, setTransactions] = useState([]);
 
-  const addBlock = (hash) => {
+  const addBlock = (hash, nonce) => {
     const selectedTs = transactions.filter(t => (!!t.selected));
     const profit = selectedTs.reduce((acc, t) => (acc + t.fee), 0);
 
@@ -19,6 +24,7 @@ const ThemeProvider = ({ children }) => {
       const newBs = [...prevBs];
       const newB = {
         hash,
+        nonce,
         noTransactions: selectedTs.length,
         profit,
       };
@@ -43,6 +49,11 @@ const ThemeProvider = ({ children }) => {
       return newTs;
     });
   };
+
+  const getLastHash = () => {
+    const lastTransaction = transactions[transactions.length - 1];
+    return lastTransaction.hash;
+  }
 
   return (
     <ThemeContext.Provider value={{ balance, blocks, transactions, addBlock, addTransaction }}>

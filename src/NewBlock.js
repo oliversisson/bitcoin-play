@@ -18,7 +18,7 @@ const NewBlock = () => {
   };
 
   const onClickAddBlock = (e) => {
-    addBlock(sha);
+    addBlock(sha, nonce);
     setNonce(0);
     setSha(undefined);
   }

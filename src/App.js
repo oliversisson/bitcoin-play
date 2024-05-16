@@ -1,5 +1,6 @@
 import './App.css';
 import { ThemeProvider } from './MyContext';
+import Blocks from './Blocks.js';
 import NewBlock from './NewBlock.js';
 import Transactions from './Transactions.js';
 
@@ -24,6 +25,7 @@ const App = () => {
           <h2>
             Bitcoin Play!
           </h2>
+          <Blocks />
         </div>
         <Transactions />
         <NewBlock />

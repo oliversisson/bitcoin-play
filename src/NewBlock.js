@@ -3,7 +3,6 @@ import forge from 'node-forge';
 import { useTheme } from './MyContext';
 import Transaction from './Transaction.js';
 
-const minTransactions = 1;
 const maxTransactions = 4;
 const md = forge.md.sha256.create();
 
@@ -29,6 +28,17 @@ const NewBlock = () => {
     setSha(md.digest().toHex());
   }
 
+  const shaErrorOrFalse = () => {
+    const selectedTs = transactions.filter(t => (!!t.selected));
+    if (selectedTs.length === 0) {
+      return "No transactions selected. Select a transaction on the left.";
+    }
+    if (selectedTs.length > maxTransactions) {
+      return "Too many transactions! Maximum number: " + maxTransactions;
+    }
+    return false;
+  }
+
   return (
     <div className="newblock">
       <p>Your current balance: {balance}</p>
@@ -36,11 +46,14 @@ const NewBlock = () => {
       {transactions.filter(t => (!!t.selected)).map(t => (
         <Transaction t={t} key={t.key} />
       ))}
+      <p> Prev hash: {} </p>
       <p> Nonce: <input type="number" value={nonce} onChange={onChangeNonce} /> </p>
-      <button type="button" onClick={onClickCalcSHA}>Calculate SHA256</button>
+      {shaErrorOrFalse() || (
+        <button type="button" onClick={onClickCalcSHA}>Calculate SHA256 hash</button>
+      )}
       {sha && (
         <div>
-          <p>SHA: {sha}</p>
+          <p>Hash: {sha}</p>
         </div>
       )}
       {sha && (

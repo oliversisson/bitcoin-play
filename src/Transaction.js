@@ -12,7 +12,7 @@ class Transaction extends React.Component {
 
   onClick = () => {
     const {t} = this.props;
-    t.selected = !t.selected;
+    t.selected = !t.selected; // shouldn't be mutating this
     this.setState({selected: t.selected});
   }
 

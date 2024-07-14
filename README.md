@@ -1,10 +1,24 @@
-# Getting Started with Create React App
+# Bitcoin Play
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Purpose
 
-In the project directory, you can run:
+This game shows how new blocks are added to the blockchain in Bitcoin. It gives a pretty good feel for how proof-of-work works.
+
+## How to Play
+
+Select transaction on the left, and then try to add the block. Start by clicking 'Calculate SHA256 hash'. If the calculated hash ends in a '0', you can add the block by clicking 'Add block'. If not, change the nonce and try again.
+
+## Things I'd Like to Improve
+
+- I'd like to make it a multiplayer game. I imagine a classroom teacher could create a private session, and all the students in the class could compete to mine new blocks. The algorithm would automatically adjust its difficulty after a set number of minutes, so students could see that working in practice.
+- It could be more obvious how the blockchain is verified, how each block has a 'previous block' hash pointing back at the previous block, thus linking all the blocks, which cannot be tampered with without going through the proof-of-work again for each block.
+- Obviously I'd like improve the look of the project (colors, graphics, layout, etc).
+
+## Running locally
+
+You can pull the project and run it as follows.
 
 ### `npm start`
 

@@ -57,7 +57,7 @@ const NewBlock = () => {
         </div>
       )}
       {sha && (
-        sha.charAt(sha.length - 1) !== "0" ?
+        sha.charAt(sha.length - 1) === "0" ?
           <div> 
             <button type="button" onClick={onClickAddBlock}>Add block</button>
           </div> :
